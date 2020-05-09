@@ -14,7 +14,7 @@ CsvDatabaseHandler::CsvDatabaseHandler(std::string const & path) {
 CsvDatabaseHandler::~CsvDatabaseHandler() {
 };
 
-void CsvDatabaseHandler::PrintDB() {
+void CsvDatabaseHandler::PrintDB() const {
 	for (auto item : bdNames)
 		std::cout << item.first + " --- " + item.second << std::endl;
 };
