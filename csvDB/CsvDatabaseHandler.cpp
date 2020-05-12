@@ -1,9 +1,9 @@
 #include "CsvDatabaseHandler.h"
 
-CsvDatabaseHandler::CsvDatabaseHandler(std::string const & path) {
+CsvDatabaseHandler::CsvDatabaseHandler(std::string const & path, bool & out) {
 	this->path = path;
-	auto flag = InitializeDB();
-	if (flag) {
+	out = InitializeDB();
+	if (out) {
 		std::cout << "База данных успешно загружена из файла " + path + " и готова к работе." << std::endl;
 	}
 	else {
@@ -16,8 +16,32 @@ CsvDatabaseHandler::~CsvDatabaseHandler() {
 
 void CsvDatabaseHandler::PrintDB() const {
 	for (auto item : bdNames)
-		std::cout << item.first + " --- " + item.second << std::endl;
-};
+		std::cout << item.first << " --- " << item.second << std::endl;
+}
+
+void CsvDatabaseHandler::findName(std::string const & name) const {
+	if (!bdNames.count(name)) {
+		std::cout << "Пользователя с таким именем не найдено." << std::endl;
+		return;
+	}
+	auto items = bdNames.equal_range(name);
+	std::cout << "Заданному имени соответствуют следующие телефоны:" << std::endl;
+	for (; items.first != items.second; ++items.first) {
+		std::cout << items.first->first << " --- " << items.first->second << std::endl;
+	}
+}
+
+
+void CsvDatabaseHandler::findNumber(std::string const & number) const {
+	bool isFirst = true;
+	for (auto item : bdNames) {
+		if (number == item.second) {
+			if (isFirst)	std::cout << "Заданному номеру соответствуют следующие имена:" << std::endl, isFirst = false;
+			std::cout << item.first  << std::endl;
+		}
+	}
+	if (!isFirst) std::cout << "Ни один пользователь с таким номером не найден." << std::endl;
+}
 
 bool CsvDatabaseHandler::InitializeDB() {
 	std::ifstream file(path);

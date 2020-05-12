@@ -1,11 +1,14 @@
 #include "Source.h"
 
 int main() {
-	setlocale(LC_ALL, "Russian");
-	CsvDatabaseHandler db("test.csv");
-	db.PrintDB();
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	bool flag = true;
+	CsvDatabaseHandler db("test.csv", flag);
+	if (!flag) return 0;
+
 	while (flag)	flag = command_handler(db);
+
 	std::cout << "Работа завершена." << std::endl;
 	return 0;
 }
@@ -28,6 +31,17 @@ bool command_handler(CsvDatabaseHandler & db) {
 
 const bool find(CsvDatabaseHandler const & db) {
 	std::cout << "Введите необходимое имя для поиска по имени, либо необходимый номер для поиска по номеру (только цифры)." << std::endl;
+	std::string input;
+	std::cin >> input;
+	int findNotDigit = input.find_first_not_of("1234567890"); 
+	if (findNotDigit == -1) {
+		std::cout << "Будет произведён поиск по номерам телефонов." << std::endl;
+		db.findNumber(input);
+	}
+	else {
+		std::cout << "Будет произведён поиск по именам." << std::endl;
+		db.findName(input);
+	}
 	return true;
 }
 

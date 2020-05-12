@@ -1,5 +1,6 @@
 #pragma once
 #include "CsvDatabaseHandler.h"
+#include <Windows.h>
 
 //поиск
 const bool find(CsvDatabaseHandler const & db);
