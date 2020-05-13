@@ -1,8 +1,10 @@
 #include "Source.h"
 
 int main() {
+#if defined(_WIN32) || defined(_WIN64)
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+#endif
 	bool flag = true;
 	CsvDatabaseHandler db("test.csv", flag);
 	if (!flag) return 0;
@@ -33,7 +35,7 @@ const bool find(CsvDatabaseHandler const & db) {
 	std::cout << "Введите необходимое имя для поиска по имени, либо необходимый номер для поиска по номеру (только цифры)." << std::endl;
 	std::string input;
 	std::cin >> input;
-	int findNotDigit = input.find_first_not_of("1234567890"); 
+	size_t findNotDigit = input.find_first_not_of("1234567890"); 
 	if (findNotDigit == -1) {
 		std::cout << "Будет произведён поиск по номерам телефонов." << std::endl;
 		db.findNumber(input);
@@ -46,17 +48,29 @@ const bool find(CsvDatabaseHandler const & db) {
 }
 
 const bool print(CsvDatabaseHandler const & db) {
-	db.PrintDB();
+	db.printDB();
 	return true;
 }
 
 bool insert(CsvDatabaseHandler & db) {
-	std::cout << "Тут будет вставка новой пары в БД" << std::endl;
+	std::string name, phone;
+	std::cout << "Введите добавляемое имя пользователя и его номер через пробел: ";
+	std::cin >> name >> phone;
+	size_t findNotDigit = phone.find_first_not_of("1234567890");
+	if (findNotDigit != -1) {
+		std::cout << "В номере телефонах не может быть символов кроме цифр." << std::endl;
+		return true;
+	}
+	db.insert(name, phone);
+	std::cout << "Пользователь добавлен." << std::endl;
 	return true;
 }
 
 bool remove(CsvDatabaseHandler & db) {
-	std::cout << "Тут будет удаление пары из БД" << std::endl;
+	std::string name;
+	std::cout << "Введите имя удаляемого пользователя: ";
+	std::cin >> name;
+	db.remove(name);
 	return true;
 }
 
