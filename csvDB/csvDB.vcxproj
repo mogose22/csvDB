@@ -125,10 +125,12 @@
   <ItemGroup>
     <ClCompile Include="CsvDatabaseHandler.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CsvDatabaseHandler.h" />
     <ClInclude Include="Source.h" />
+    <ClInclude Include="UserData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

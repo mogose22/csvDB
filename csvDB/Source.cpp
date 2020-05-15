@@ -11,7 +11,7 @@ int main() {
 
 	while (flag)	flag = command_handler(db);
 
-	std::cout << "Работа завершена." << std::endl;
+	std::wcout << "Работа завершена." << std::endl;
 	return 0;
 }
 
@@ -35,7 +35,7 @@ const bool find(CsvDatabaseHandler const & db) {
 	std::cout << "Введите необходимое имя для поиска по имени, либо необходимый номер для поиска по номеру (только цифры)." << std::endl;
 	std::string input;
 	std::cin >> input;
-	size_t findNotDigit = input.find_first_not_of("1234567890"); 
+	size_t findNotDigit = input.find_first_not_of("1234567890");
 	if (findNotDigit == -1) {
 		std::cout << "Будет произведён поиск по номерам телефонов." << std::endl;
 		db.findNumber(input);

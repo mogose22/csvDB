@@ -21,12 +21,18 @@
     <ClCompile Include="CsvDatabaseHandler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="UserData.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CsvDatabaseHandler.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="UserData.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,11 +1,12 @@
 #pragma once
 #include <map>
 #include <iostream>
-#include <string>
 #include <fstream>
+#include <iterator>
+#include <algorithm>
+#include "UserData.h"
 
-class CsvDatabaseHandler {
-public:
+struct CsvDatabaseHandler {
 	//Конструктор принимает имя файла с базой данных.
 	CsvDatabaseHandler(std::string const & path, bool & out);
 	//Деструктор пока ничего не делает. Возможно ничего и не понадобился, у тебя пока не одного new.
@@ -28,5 +29,5 @@ private:
 	//Имя файла, возможно тут можно будет указывать и полные пути.
 	std::string path;
 	//База данных, где ключи- имена. Имена могут повторяться.
-	std::multimap<std::string, std::string> dbNames;
+	std::multimap<std::string, UserData> db;
 };
